@@ -1,0 +1,35 @@
+# This is /fit/CMakeLists.txt
+SET(fit_sources
+fit_function.h
+fit_function.cxx
+fit_least_squares_function.h
+fit_gaussian.h
+fit_polynomial.h
+fit_exponential.h
+fit_radial_basis_function.h
+
+fit_factory.h
+fit_factory.cxx
+fit_solver.h
+fit_lm_solver.h
+fit_svd_solver.h
+fit_amoeba_solver.h
+)
+
+ADD_LIBRARY(fit ${fit_sources})
+TARGET_LINK_LIBRARIES(fit vnl_algo vnl)
+FIND_PACKAGE(PYTHONLIBS)
+IF( PYTHONLIBS_FOUND )
+
+    INCLUDE_DIRECTORIES( ${PYTHON_INCLUDE_DIRS} )
+     SET(py_fit_sources
+         python_functions.h   python_functions.cxx
+        )
+
+    PYTHON_ADD_MODULE(py_fit ${py_fit_sources})
+    TARGET_LINK_LIBRARIES(py_fit fit ${PYTHON_LIBRARY})
+
+ENDIF(PYTHONLIBS_FOUND)
+IF( BUILD_TESTING )
+  SUBDIRS(tests)
+ENDIF( BUILD_TESTING )

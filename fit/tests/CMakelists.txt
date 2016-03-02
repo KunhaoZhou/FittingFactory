@@ -1,0 +1,23 @@
+# This is /fit/tests/CMakeLists.txt
+ADD_EXECUTABLE( fit_test_all
+# Driver source and utilities
+test_driver.cxx
+# The tests
+test_all.cxx
+test_gaussian.cxx
+test_polynomial.cxx
+test_exponential.cxx
+test_radial_basis.cxx
+test_svd_solver.cxx
+test_lm_solver.cxx
+test_amoeba_solver.cxx
+)
+TARGET_LINK_LIBRARIES(fit_test_all fit vnl vul testlib)
+ADD_TEST(test_all fit_test_all test_all )
+ADD_TEST(test_exponential fit_test_all test_exponential )
+ADD_TEST(test_gaussian fit_test_all test_gaussian )
+ADD_TEST(test_polynomial fit_test_all test_polynomial )
+ADD_TEST(test_radial_basis fit_test_all test_radial_basis)
+ADD_TEST(test_svd_solver fit_test_all test_svd_solver )
+ADD_TEST(test_lm_solver fit_test_all test_lm_solver )
+ADD_TEST(test_amoeba_solver fit_test_all test_amoeba_solver )
