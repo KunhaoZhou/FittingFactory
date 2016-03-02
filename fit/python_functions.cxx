@@ -18,12 +18,13 @@ PyObject* fit(PyObject* /*self*/, PyObject *args) {
 	PyObject* xList_obj, *yList_obj;
 	PyObject* listItemX_obj, *listItemY_obj;
   char* fnname, *fsname;
-  if (!PyArg_ParseTuple(args, "O!O!ss",
+  if (!PyArg_ParseTuple(args, "O!O!ss", 
     &PyList_Type, &xList_obj, &PyList_Type, &yList_obj, &fnname, &fsname))
     return NULL;
 
 	unsigned num_elem = PyList_Size(xList_obj);	
-  if (num_elem <= 0) return NULL;
+  if (num_elem <= 0) 
+    return NULL;
 	vnl_vector<double> xi(num_elem), y(num_elem);
 	for (unsigned i = 0; i < num_elem; i++) { 	/* iterate over items of the list, grabbing PyObjects, and converting to doubles */
 		listItemX_obj = PyList_GetItem(xList_obj, i);
